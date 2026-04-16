@@ -1,5 +1,5 @@
-use leptos::*;
 use crate::state::use_app_state;
+use leptos::*;
 use wasm_bindgen::closure::Closure;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlVideoElement;
@@ -7,12 +7,16 @@ use web_sys::HtmlVideoElement;
 #[component]
 pub fn VideoPlayer() -> impl IntoView {
     let state = use_app_state();
+    // Clone once for the effect to avoid moving the primary `state` used in the view
+    let state_for_effect = state.clone();
     create_effect(move |_| {
-        let file_opt = state.file.get();
+        let state_local = state_for_effect.clone();
+        let file_opt = state_local.file.get();
         if let Some(file) = file_opt {
             if let Some(window) = web_sys::window() {
                 if let Some(document) = window.document() {
-                    if let Some(video_el) = document.get_element_by_id("player")
+                    if let Some(video_el) = document
+                        .get_element_by_id("player")
                         .and_then(|el| el.dyn_into::<HtmlVideoElement>().ok())
                     {
                         if let Ok(url) = web_sys::Url::create_object_url_with_blob(&file) {
@@ -20,26 +24,31 @@ pub fn VideoPlayer() -> impl IntoView {
                             video_el.set_preload("metadata");
                             video_el.set_muted(true);
 
-                            let state_clone = state.clone();
+                            let state_clone = state_local.clone();
                             let video_clone = video_el.clone();
                             let metadata_cb = Closure::wrap(Box::new(move || {
                                 let duration_ms = video_clone.duration() * 1000.0;
                                 state_clone.duration_ms.set(duration_ms);
-                                if state_clone.trim_end_ms.get() <= 0.0 {
+                                if state_clone.trim_end_ms.get_untracked() <= 0.0 {
                                     state_clone.trim_end_ms.set(duration_ms);
                                 }
-                                if state_clone.trim_start_ms.get() < 0.0 {
+                                if state_clone.trim_start_ms.get_untracked() < 0.0 {
                                     state_clone.trim_start_ms.set(0.0);
                                 }
-                            }) as Box<dyn FnMut()>);
-                            video_el.set_onloadedmetadata(Some(metadata_cb.as_ref().unchecked_ref()));
+                            })
+                                as Box<dyn FnMut()>);
+                            video_el
+                                .set_onloadedmetadata(Some(metadata_cb.as_ref().unchecked_ref()));
                             metadata_cb.forget();
 
-                            let state_clone = state.clone();
+                            let state_clone = state_local.clone();
                             let video_clone = video_el.clone();
                             let timeupdate_cb = Closure::wrap(Box::new(move || {
-                                state_clone.playhead_ms.set(video_clone.current_time() * 1000.0);
-                            }) as Box<dyn FnMut()>);
+                                state_clone
+                                    .playhead_ms
+                                    .set(video_clone.current_time() * 1000.0);
+                            })
+                                as Box<dyn FnMut()>);
                             video_el.set_ontimeupdate(Some(timeupdate_cb.as_ref().unchecked_ref()));
                             timeupdate_cb.forget();
                         }
@@ -51,9 +60,10 @@ pub fn VideoPlayer() -> impl IntoView {
 
     view! {
         <div class="video-player" role="region" aria-label="Video player">
-            <video id="player" controls=true class="video-element" aria-label="Playback area" tabindex="0">
+            <video id="player" controls=true class="video-element" aria-label="Playback area" tabindex="0" aria-describedby="video-desc">
                 <p>"Your browser does not support the video element."</p>
             </video>
+            <p id="video-desc" class="sr-only" aria-live="polite">{move || format!("Video duration: {:.2} seconds", state.duration_ms.get() / 1000.0)}</p>
         </div>
     }
 }

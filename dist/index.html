@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlashCut — Privacy-First Video Trimmer</title>
+    <link rel="stylesheet" href="/assets/styles/main.css" />
+    
+<script type="module">
+import init, * as bindings from '/flashcut-frontend-5d4c48ff7c1f8d07.js';
+const wasm = await init({ module_or_path: '/flashcut-frontend-5d4c48ff7c1f8d07_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+<link rel="modulepreload" href="/flashcut-frontend-5d4c48ff7c1f8d07.js" crossorigin="anonymous" integrity="sha384-pf/DMJXP9/jYmKTMS0hCw8L3Q0AJm3/Kb6JsJQqn4OYJcNDU0u+toEq+Pl4NIViY"><link rel="preload" href="/flashcut-frontend-5d4c48ff7c1f8d07_bg.wasm" crossorigin="anonymous" integrity="sha384-VXU/OFGx+yKgtdm/MawXdVovYCuXwxtLFW7AzvTFlLE4HC/K/Xiw1Rsgbw4Zup13" as="fetch" type="application/wasm"></head>
+
+<body>
+    <!-- Leptos mount point injected by trunk -->
+</body>
+
+</html>

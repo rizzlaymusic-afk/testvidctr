@@ -1,0 +1,6 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Checking flashcut-core-wasm v0.1.0 (H:\rust wasm video cutter\crates\core-wasm)
+    Checking flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2m 00s

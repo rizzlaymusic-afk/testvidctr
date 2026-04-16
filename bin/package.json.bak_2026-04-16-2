@@ -1,0 +1,12 @@
+{
+    "name": "flashcut-smoke",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "smoke": "node smoke-test.js",
+        "aria-check": "node aria-check.js"
+    },
+    "dependencies": {
+        "playwright": "^1.42.0"
+    }
+}
