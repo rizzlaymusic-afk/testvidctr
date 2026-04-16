@@ -43,11 +43,11 @@ jobs:
           npx playwright install chromium
 
       - name: Serve dist and run smoke test
-        working-directory: H:/rust wasm video cutter
         run: |
           # serve the built frontend and run smoke-test
           npx http-server ./crates/frontend/dist -p 8080 &
           pushd tools/smoke-test
+          npm ci
           npm run smoke
           popd
         env:
