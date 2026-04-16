@@ -1,0 +1,54 @@
+name: CI - Build & Smoke Test
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          components: clippy
+
+      - name: Add wasm target
+        run: rustup target add wasm32-unknown-unknown
+
+      - name: Cargo check workspace
+        run: cargo check --workspace --all-targets --locked
+
+      - name: Install trunk
+        run: cargo install trunk --locked || true
+
+      - name: Build frontend (trunk)
+        working-directory: crates/frontend
+        run: trunk build --release
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Playwright deps
+        working-directory: tools/smoke-test
+        run: |
+          npm ci
+          npx playwright install chromium
+
+      - name: Serve dist and run smoke test
+        working-directory: H:/rust wasm video cutter
+        run: |
+          # serve the built frontend and run smoke-test
+          npx http-server ./crates/frontend/dist -p 8080 &
+          pushd tools/smoke-test
+          npm run smoke
+          popd
+        env:
+          CI: true
