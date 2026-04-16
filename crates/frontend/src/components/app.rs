@@ -15,7 +15,7 @@ pub fn App() -> impl IntoView {
                 <h1 class="logo">"⚡ FlashCut"</h1>
                 <span class="tagline">"Privacy-First · Zero-Upload · Frame-Accurate"</span>
                 <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
-                    <button class="micro-anim" on:click=move |_| { state.theater_mode.set(!state.theater_mode.get()); }>{move || if state.theater_mode.get() { "Exit Theater" } else { "Theater" }}</button>
+                    <button class="micro-anim" aria-pressed=move || state.theater_mode.get() on:click=move |_| { state.theater_mode.set(!state.theater_mode.get()); } type="button">{move || if state.theater_mode.get() { "Exit Theater" } else { "Theater" }}</button>
                 </div>
             </header>
             <main class="app-main">

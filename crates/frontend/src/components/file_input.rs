@@ -1,6 +1,7 @@
 use crate::state::use_app_state;
 use js_sys::Array;
 use leptos::*;
+use leptos::ev::KeyboardEvent;
 use wasm_bindgen::JsCast;
 use wasm_bindgen_futures::spawn_local;
 
@@ -81,11 +82,27 @@ pub fn FileInput() -> impl IntoView {
         }
     };
 
+    // Keyboard helper: pressing Enter/Space when the drop zone is focused opens file dialog
+    let on_dropzone_key = move |ev: KeyboardEvent| {
+        let k = ev.key();
+        if k == "Enter" || k == " " {
+            if let Some(window) = web_sys::window() {
+                if let Some(document) = window.document() {
+                    if let Some(input_el) = document.get_element_by_id("file-input")
+                        .and_then(|e| e.dyn_into::<web_sys::HtmlInputElement>().ok())
+                    {
+                        input_el.click();
+                    }
+                }
+            }
+        }
+    };
+
     view! {
-        <div class="drop-zone file-input">
-            <input class="micro-anim" type="file" accept="video/*" on:change=onchange/>
-            <p>"Drop a video or choose a file"</p>
-            <button class="micro-anim" on:click=load_sample>{|| "Load Sample Video (dev)" }</button>
+        <div class="drop-zone file-input" role="region" aria-label="File input drop zone" tabindex="0" on:keydown=on_dropzone_key>
+            <input id="file-input" class="micro-anim" type="file" accept="video/*" on:change=onchange aria-label="Choose a video file" />
+            <p>"Drop a video or " <label for="file-input">"choose a file"</label></p>
+            <button type="button" class="micro-anim" on:click=load_sample aria-label="Load sample video (development)">{|| "Load Sample Video (dev)" }</button>
         </div>
     }
 }

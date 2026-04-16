@@ -1,5 +1,5 @@
 use crate::state::use_app_state;
-use leptos::ev::MouseEvent;
+use leptos::ev::{MouseEvent, KeyboardEvent};
 use leptos::*;
 use wasm_bindgen::JsCast;
 
@@ -49,6 +49,39 @@ pub fn Timeline() -> impl IntoView {
             }
         }
     };
+
+    // Keyboard handlers for trim handles: Arrow keys move by 100ms steps
+    let on_start_handle_key = {
+        let state = state.clone();
+        move |ev: KeyboardEvent| {
+            let key = ev.key();
+            let step = 100.0; // ms
+            let mut new_start = state.trim_start_ms.get();
+            match key.as_str() {
+                "ArrowLeft" => new_start = (new_start - step).max(0.0),
+                "ArrowRight" => new_start = (new_start + step).min(state.trim_end_ms.get()),
+                _ => return,
+            }
+            state.trim_start_ms.set(new_start);
+            ev.prevent_default();
+        }
+    };
+
+    let on_end_handle_key = {
+        let state = state.clone();
+        move |ev: KeyboardEvent| {
+            let key = ev.key();
+            let step = 100.0; // ms
+            let mut new_end = state.trim_end_ms.get();
+            match key.as_str() {
+                "ArrowLeft" => new_end = (new_end - step).max(state.trim_start_ms.get()),
+                "ArrowRight" => new_end = (new_end + step).min(state.duration_ms.get()),
+                _ => return,
+            }
+            state.trim_end_ms.set(new_end);
+            ev.prevent_default();
+        }
+    };
     view! {
         <div class="timeline-container">
             <div class="timeline-labels">
@@ -60,8 +93,8 @@ pub fn Timeline() -> impl IntoView {
                 <div class="timeline-excluded" style=move || format!("width: {}%", trim_start_pct()) />
                 <div class="timeline-active" style=move || format!("left: {}%; width: {}%", trim_start_pct(), trim_end_pct() - trim_start_pct()) />
                 <div class="timeline-excluded right" style=move || format!("left: {}%; width: {}%", trim_end_pct(), 100.0 - trim_end_pct()) />
-                <div class="trim-handle start" style=move || format!("left: {}%", trim_start_pct()) />
-                <div class="trim-handle end" style=move || format!("left: {}%", trim_end_pct()) />
+                <div class="trim-handle start" tabindex="0" role="slider" aria-label="Trim start" aria-valuemin=move || "0" aria-valuemax=move || state.duration_ms.get().to_string() aria-valuenow=move || state.trim_start_ms.get().to_string() on:keydown=on_start_handle_key style=move || format!("left: {}%", trim_start_pct()) />
+                <div class="trim-handle end" tabindex="0" role="slider" aria-label="Trim end" aria-valuemin=move || state.trim_start_ms.get().to_string() aria-valuemax=move || state.duration_ms.get().to_string() aria-valuenow=move || state.trim_end_ms.get().to_string() on:keydown=on_end_handle_key style=move || format!("left: {}%", trim_end_pct()) />
                 <div class="playhead" style=move || format!("left: {}%", playhead_pct()) />
             </div>
             <div class="timeline-duration">"Dauer: " {move || format_timecode(state.duration_ms.get())} " · Schnitt: " {move || format_timecode(state.trim_end_ms.get() - state.trim_start_ms.get())}</div>
