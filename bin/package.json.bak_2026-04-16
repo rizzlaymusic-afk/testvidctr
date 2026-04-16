@@ -3,9 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "smoke": "node smoke-test.js",
-        "aria-check": "node aria-check.js",
-        "trim-check": "node trim-check.js"
+        "smoke": "node smoke-test.js"
     },
     "dependencies": {
         "playwright": "^1.42.0"

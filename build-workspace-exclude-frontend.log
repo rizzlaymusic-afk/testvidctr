@@ -1,0 +1,105 @@
+   Compiling proc-macro2 v1.0.106
+   Compiling zerocopy v0.8.48
+   Compiling wasm-bindgen v0.2.118
+   Compiling serde v1.0.228
+   Compiling regex-syntax v0.8.10
+   Compiling quote v1.0.45
+   Compiling syn v2.0.117
+   Compiling regex-automata v0.4.14
+   Compiling matchers v0.2.0
+   Compiling ppv-lite86 v0.2.21
+   Compiling rand_chacha v0.3.1
+   Compiling rand v0.8.5
+   Compiling synstructure v0.13.2
+   Compiling wasm-bindgen-macro-support v0.2.118
+   Compiling zerofrom-derive v0.1.7
+   Compiling yoke-derive v0.8.2
+   Compiling futures-macro v0.3.32
+   Compiling zerovec-derive v0.11.3
+   Compiling displaydoc v0.2.5
+   Compiling tokio-macros v2.7.0
+   Compiling tracing-attributes v0.1.31
+   Compiling thiserror-impl v1.0.69
+   Compiling tokio v1.52.0
+   Compiling futures-util v0.3.32
+   Compiling serde_derive v1.0.228
+   Compiling async-trait v0.1.89
+   Compiling tracing v0.1.44
+   Compiling zerofrom v0.1.7
+   Compiling yoke v0.8.2
+   Compiling axum-macros v0.4.2
+   Compiling thiserror v1.0.69
+   Compiling zerovec v0.11.6
+   Compiling zerotrie v0.2.4
+   Compiling tungstenite v0.24.0
+   Compiling tracing-subscriber v0.3.23
+   Compiling tinystr v0.8.3
+   Compiling potential_utf v0.1.5
+   Compiling icu_locale_core v2.2.0
+   Compiling icu_collections v2.2.0
+   Compiling wasm-bindgen-macro v0.2.118
+   Compiling futures-executor v0.3.32
+   Compiling axum-core v0.4.5
+   Compiling futures v0.3.32
+   Compiling tower v0.4.13
+   Compiling icu_provider v2.2.0
+   Compiling icu_properties v2.2.0
+   Compiling icu_normalizer v2.2.0
+   Compiling hyper v1.9.0
+   Compiling tokio-tungstenite v0.24.0
+   Compiling tower v0.5.3
+   Compiling js-sys v0.3.95
+   Compiling serde_urlencoded v0.7.1
+   Compiling tokio-util v0.7.18
+   Compiling idna_adapter v1.2.1
+   Compiling flashcut-shared v0.1.0 (H:\rust wasm video cutter\crates\shared)
+   Compiling idna v1.1.0
+   Compiling hyper-util v0.1.20
+   Compiling tower-http v0.5.2
+   Compiling console_error_panic_hook v0.1.7
+   Compiling url v2.5.8
+   Compiling axum v0.7.9
+   Compiling tungstenite v0.21.0
+   Compiling tokio-tungstenite v0.21.0
+   Compiling web-sys v0.3.95
+   Compiling serde-wasm-bindgen v0.6.5
+   Compiling wasm-bindgen-futures v0.4.68
+   Compiling flashcut-backend v0.1.0 (H:\rust wasm video cutter\crates\backend)
+warning: unused import: `Deserialize`
+  --> crates\backend\src\handlers.rs:12:13
+   |
+12 | use serde::{Deserialize, Serialize};
+   |             ^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `MAX_PARTICIPANTS` is never used
+ --> crates\backend\src\session.rs:7:11
+  |
+7 | pub const MAX_PARTICIPANTS: usize = 10;
+  |           ^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `flashcut-backend` (bin "flashcut-server") generated 2 warnings (run `cargo fix --bin "flashcut-server" -p flashcut-backend` to apply 1 suggestion)
+   Compiling flashcut-core-wasm v0.1.0 (H:\rust wasm video cutter\crates\core-wasm)
+warning: unused import: `crate::webcodecs::EncodedVideoChunk`
+ --> crates\core-wasm\src\encoder.rs:1:5
+  |
+1 | use crate::webcodecs::EncodedVideoChunk;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> crates\core-wasm\src\encoder.rs:129:9
+    |
+129 |     let mut blob_parts = web_sys::BlobPropertyBag::new();
+    |         ----^^^^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: `flashcut-core-wasm` (lib) generated 2 warnings (run `cargo fix --lib -p flashcut-core-wasm` to apply 2 suggestions)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 37.70s

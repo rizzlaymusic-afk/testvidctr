@@ -4,8 +4,7 @@
     "private": true,
     "scripts": {
         "smoke": "node smoke-test.js",
-        "aria-check": "node aria-check.js",
-        "trim-check": "node trim-check.js"
+        "aria-check": "node aria-check.js"
     },
     "dependencies": {
         "playwright": "^1.42.0"

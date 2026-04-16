@@ -1,0 +1,23 @@
+2026-04-16T19:29:33.447118Z  INFO Starting trunk 0.21.14
+2026-04-16T19:29:33.462842Z  WARN The field `address` in the configuration is deprecated and will be removed in a future version. Migrate to the `addresses` field, which allows adding more than one.    
+2026-04-16T19:29:33.473653Z  INFO starting build
+   Compiling flashcut-core-wasm v0.1.0 (H:\rust wasm video cutter\crates\core-wasm)
+   Compiling flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 11.05s
+2026-04-16T19:29:47.220925Z ERROR error
+error from build pipeline
+
+Caused by:
+    0: HTML build pipeline failed (1 errors), showing first
+    1: error from asset pipeline
+    2: running wasm-bindgen
+    3: error minifying or copying JS loader file to stage dir
+    4: error writing JS loader file to stage dir
+    5: Das System kann den angegebenen Pfad nicht finden. (os error 3)
+2026-04-16T19:29:47.221331Z ERROR error from build pipeline
+2026-04-16T19:29:47.221341Z  INFO   1: HTML build pipeline failed (1 errors), showing first
+2026-04-16T19:29:47.221343Z  INFO   2: error from asset pipeline
+2026-04-16T19:29:47.221346Z  INFO   3: running wasm-bindgen
+2026-04-16T19:29:47.221348Z  INFO   4: error minifying or copying JS loader file to stage dir
+2026-04-16T19:29:47.221350Z  INFO   5: error writing JS loader file to stage dir
+2026-04-16T19:29:47.221352Z  INFO   6: Das System kann den angegebenen Pfad nicht finden. (os error 3)

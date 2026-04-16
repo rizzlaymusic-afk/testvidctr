@@ -1,0 +1,28 @@
+2026-04-16T19:30:21.852106Z  INFO Starting trunk 0.21.14
+2026-04-16T19:30:21.852168Z DEBUG update_check: Spawning update check skip=false
+2026-04-16T19:30:21.852716Z  WARN The field `address` in the configuration is deprecated and will be removed in a future version. Migrate to the `addresses` field, which allows adding more than one.    
+2026-04-16T19:30:21.852809Z DEBUG Performing update check
+2026-04-16T19:30:21.853362Z DEBUG Enforce version - actual: 0.21.14, required: *
+2026-04-16T19:30:21.853485Z  INFO starting build
+2026-04-16T19:30:21.858413Z DEBUG Time since last check: 9h12m59s887ms237µs700ns
+2026-04-16T19:30:21.858443Z DEBUG No refresh needed
+2026-04-16T19:30:21.858448Z DEBUG Current: 0.21.14, Most recent: 0.21.14
+2026-04-16T19:30:21.865558Z DEBUG spawning asset pipelines
+2026-04-16T19:30:22.290422Z DEBUG building flashcut-frontend
+2026-04-16T19:30:22.290451Z DEBUG cargo args args=["build", "--target=wasm32-unknown-unknown", "--manifest-path", "H:\\rust wasm video cutter\\crates\\frontend\\Cargo.toml"]
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.39s
+2026-04-16T19:30:22.788409Z DEBUG fetching cargo artifacts
+2026-04-16T19:30:23.297029Z DEBUG get_info: Getting tool app=WasmBindgen version=Some("0.2.118") offline=false client_options=HttpClientOptions { root_certificate: None, accept_invalid_certificates: false }
+2026-04-16T19:30:23.318968Z DEBUG get_info:find_system: failed to detect system tool: cannot find binary path app=WasmBindgen version=Some("0.2.118") offline=false client_options=HttpClientOptions { root_certificate: None, accept_invalid_certificates: false } app=WasmBindgen
+2026-04-16T19:30:23.319652Z DEBUG get_info: Using wasm-bindgen (0.2.118) from: C:\Users\BigBr\AppData\Local\trunkrs\trunk\cache\wasm-bindgen-0.2.118\wasm-bindgen.exe app=WasmBindgen version=Some("0.2.118") offline=false client_options=HttpClientOptions { root_certificate: None, accept_invalid_certificates: false }
+2026-04-16T19:30:23.320041Z DEBUG calling wasm-bindgen for flashcut-frontend
+2026-04-16T19:30:23.320057Z DEBUG wasm-bindgen args args=["--target=web", "--out-dir=C:\\flashcut_target\\wasm-bindgen\\debug", "--out-name=flashcut-frontend", "C:\\flashcut_target\\wasm32-unknown-unknown\\debug\\flashcut_frontend_wasm.wasm", "--no-typescript"]
+2026-04-16T19:30:23.597885Z DEBUG copying generated wasm-bindgen artifacts
+2026-04-16T19:30:23.597909Z DEBUG processing hash for C:\flashcut_target\wasm32-unknown-unknown\debug\flashcut_frontend_wasm.wasm
+2026-04-16T19:30:23.601798Z DEBUG copying C:\flashcut_target\wasm-bindgen\debug\flashcut-frontend.js to \\?\H:\rust wasm video cutter\dist\.stage\flashcut-frontend-e12ec7c099fa3e5e.js
+2026-04-16T19:30:23.605076Z DEBUG copying C:\flashcut_target\wasm-bindgen\debug\flashcut-frontend_bg.wasm to \\?\H:\rust wasm video cutter\dist\.stage\flashcut-frontend-e12ec7c099fa3e5e_bg.wasm
+2026-04-16T19:30:23.652139Z DEBUG recording SRI record - type: Sha384. name: flashcut-frontend-e12ec7c099fa3e5e.js, value: OutputDigest { integrity: Sha384, hash: "oOOmywWENIh6qA2Wzbb7W81SGAZ1abXXd9UKmfj2hMjvKX3SAWLmsTd9/qC92Oda" }
+2026-04-16T19:30:23.669406Z DEBUG recording SRI record - type: Sha384. name: flashcut-frontend-e12ec7c099fa3e5e_bg.wasm, value: OutputDigest { integrity: Sha384, hash: "JeB9k4xx+BhA6iSxWiIVooHke1vChq3GD3W3NUsJE+3jvhQnOG0LSOq77jtRveVN" }
+2026-04-16T19:30:23.669443Z DEBUG rust build complete
+2026-04-16T19:30:23.674149Z  INFO applying new distribution
+2026-04-16T19:30:23.684638Z  INFO success

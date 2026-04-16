@@ -1,0 +1,17 @@
+    Blocking waiting for file lock on package cache
+    Checking once_cell v1.21.4
+    Checking futures-core v0.3.32
+    Checking serde_core v1.0.228
+    Checking memchr v2.8.0
+    Checking wasm-bindgen v0.2.118
+    Checking thiserror v1.0.69
+    Checking futures-util v0.3.32
+    Checking console_error_panic_hook v0.1.7
+    Checking serde v1.0.228
+    Checking serde_json v1.0.149
+    Checking js-sys v0.3.95
+    Checking web-sys v0.3.95
+    Checking serde-wasm-bindgen v0.6.5
+    Checking wasm-bindgen-futures v0.4.68
+    Checking flashcut-core-wasm v0.1.0 (H:\rust wasm video cutter\crates\core-wasm)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1m 19s

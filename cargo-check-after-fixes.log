@@ -1,0 +1,4 @@
+    Checking flashcut-core-wasm v0.1.0 (H:\rust wasm video cutter\crates\core-wasm)
+    Checking flashcut-backend v0.1.0 (H:\rust wasm video cutter\crates\backend)
+    Checking flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.58s
