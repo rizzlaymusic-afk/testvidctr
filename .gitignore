@@ -1,0 +1,24 @@
+# Rust
+/target/
+/crates/*/target/
+**/*.rs.bk
+Cargo.lock
+
+# WASM Build Artefakte
+/crates/frontend/dist/
+/crates/core-wasm/pkg/
+/crates/frontend/pkg/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VSCode (except recommendations)
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+
+# Environment
+.env
+.env.local

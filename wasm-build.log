@@ -1,0 +1,29 @@
+[INFO]: Checking for the Wasm target...
+[INFO]: Compiling to Wasm...
+   Compiling flashcut-core-wasm v0.1.0 (H:\rust wasm video cutter\crates\core-wasm)
+warning: unused import: `crate::webcodecs::EncodedVideoChunk`
+ --> crates\core-wasm\src\encoder.rs:6:5
+  |
+6 | use crate::webcodecs::EncodedVideoChunk;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+
+warning: variable does not need to be mutable
+   --> crates\core-wasm\src\encoder.rs:128:9
+    |
+128 |     let mut blob_parts = web_sys::BlobPropertyBag::new();
+    |         ----^^^^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+
+    Finished `release` profile [optimized] target(s) in 1m 18s
+[INFO]: Installing wasm-bindgen...
+[INFO]: Optimizing wasm binaries with `wasm-opt`...
+[INFO]: Optional fields missing from Cargo.toml: 'description', 'repository', and 'license'. These are not necessary, but recommended
+[INFO]: :-) Done in 1m 40s
+[INFO]: :-) Your wasm pkg is ready to publish at crates\core-wasm\assets\wasm.
