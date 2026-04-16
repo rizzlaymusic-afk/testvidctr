@@ -63,3 +63,64 @@
 - **CI automation**: Add CI jobs for builds, wasm tests, and integration smoke tests.
 - **Documentation & handover**: Update docs, runbooks, and handover notes for maintainers.
 - **Final verification & release**: Acceptance testing, release checklist, tagging, and publish steps.
+
+## Handover — Dev Runbook (quick)
+
+Follow these steps to run the project in local dev mode and verify the end-to-end trim → export flow used during handover.
+
+- **Prereqs:** Rust toolchain (stable), `wasm32-unknown-unknown` target, `trunk`, `node` + `npm` (for smoke-test), and `cargo`.
+
+- **1) Start backend (optional for local-only UX):**
+
+```powershell
+# Run from repo root
+cargo run -p flashcut-backend
+```
+
+- **2) Start frontend dev server (Trunk):**
+
+```powershell
+# from repo root
+Push-Location crates/frontend
+trunk serve --address 127.0.0.1 --port 8080 --open
+Pop-Location
+```
+
+- **3) Load a sample video (dev):**
+
+Use the UI `Load Sample Video (dev)` button in the File input drop zone, or set the file input manually for testing:
+
+```powershell
+# The smoke-test helper sets the input programmatically; manual alternative:
+# Open the app in a browser and choose assets/sample/sample.webm via the file dialog.
+```
+
+- **4) Run the headless smoke test (sanity):**
+
+```powershell
+Push-Location tools/smoke-test
+npm install
+npx playwright install chromium
+npm run smoke
+Pop-Location
+```
+
+- **5) Verify export:**
+
+- Watch the in-app progress bar and `Session` panel for errors. In headless runs the smoke test detects encoder console logs named `encoder: assembled blob size` and `encoder: calling final progress 1.0` as success signals.
+
+- **6) Debugging tips:**
+
+- If export stalls, check browser console for `captureStream not supported` or `MediaRecorder not available`.
+- If running headless, ensure Chromium supports `MediaRecorder` and `captureStream`. The smoke test runs a local Chromium binary installed by Playwright.
+- If `trunk` fails to bind port 8080, find and stop the existing `trunk` process: `netstat -ano | Select-String ":8080"` then `Stop-Process -Id <pid>`.
+
+## Handover next actions (short)
+
+- Finalize `FLASHCUT_HANDOVER.md` with annotated screenshots and a short checklist of U-BFCW audit items. (Owner: maintainer)
+- Commit `README.dev.md` with the minimal runbook snippets above and attach smoke-test results (log) to the handover package.
+- Add a CI job to run `tools/smoke-test` on a matrix that supports Playwright/Chromium (optional; needed for release gating).
+
+---
+
+Keep this section short and copy it into `FLASHCUT_HANDOVER.md` as a highlighted quick-start block for incoming maintainers.
