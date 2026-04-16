@@ -302,6 +302,53 @@ chmod +x scripts/setup-dev.sh
 ./scripts/setup-dev.sh
 ```
 
+## Quick Dev Runbook (hand-over)
+
+Use this quick runbook for maintainers to get a dev instance running and verify the trim → export flow locally.
+
+- Prereqs: Rust stable, `wasm32-unknown-unknown` target, `trunk`, Node.js + npm (for smoke-test), and `cargo`.
+
+- Start backend (optional):
+
+```powershell
+# from repo root
+cargo run -p flashcut-backend
+```
+
+- Start frontend dev server (Trunk):
+
+```powershell
+# from repo root
+Push-Location crates/frontend
+trunk serve --address 127.0.0.1 --port 8080 --open
+Pop-Location
+```
+
+- Load sample video (dev):
+
+Open the app in the browser and click `Load Sample Video (dev)` in the file input drop zone, or use the smoke test which sets the file input programmatically.
+
+- Run headless smoke test (sanity):
+
+```powershell
+Push-Location tools/smoke-test
+npm install
+npx playwright install chromium
+npm run smoke
+Pop-Location
+```
+
+- Verify export: watch the UI progress bar and Session panel for errors. The smoke test considers `encoder: assembled blob size` and `encoder: calling final progress 1.0` as success signals.
+
+- Troubleshooting tips:
+
+- If `captureStream not supported` or `MediaRecorder not available` appear in console, run tests in an environment with a recent Chromium build (Playwright-installed Chromium is used by the smoke test).
+- If `trunk` fails to bind, check and stop existing trunk process: `netstat -ano | Select-String ":8080"` then `Stop-Process -Id <pid>`.
+
+---
+
+Keep this quick runbook at the top of `FLASHCUT_HANDOVER.md` in a highlighted block for incoming maintainers.
+
 ### 3.2 VSCode Konfiguration (vollständig)
 
 #### `.vscode/extensions.json`
