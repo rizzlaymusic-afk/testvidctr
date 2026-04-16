@@ -1,0 +1,83 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on artifact directory
+warning: output filename collision at H:\rust wasm video cutter\target\debug\deps\flashcut_frontend.pdb
+  |
+  = note: the bin target `flashcut-frontend` in package `flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)` has the same output filename as the lib target `flashcut_frontend` in package `flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)`
+  = note: if this looks unexpected, it may be a bug in Cargo. Please file a bug report at https://github.com/rust-lang/cargo/issues/ with as much information as you can provide.
+  = note: cargo 1.93.1 (083ac5135 2025-12-15) running on `x86_64-pc-windows-msvc` target `x86_64-pc-windows-msvc`
+  = note: first unit: Unit { pkg: Package { id: PackageId { name: "flashcut-frontend", version: "0.1.0", source: "H:\\rust wasm video cutter\\crates\\frontend" }, ..: ".." }, target: TargetInner { name: "flashcut-frontend", doc: true, ..: with_path("H:\\rust wasm video cutter\\crates\\frontend\\src\\main.rs", Edition2021) }, profile: Profile { ..: default_dev() }, kind: Host, mode: Build, features: [], rustflags: [], rustdocflags: [], links_overrides: {}, artifact: false, artifact_target_for_features: None, is_std: false, dep_hash: 18388994549511200985 }
+  = note: second unit: Unit { pkg: Package { id: PackageId { name: "flashcut-frontend", version: "0.1.0", source: "H:\\rust wasm video cutter\\crates\\frontend" }, ..: ".." }, target: TargetInner { name_inferred: true, ..: lib_target("flashcut_frontend", ["cdylib"], "H:\\rust wasm video cutter\\crates\\frontend\\src\\lib.rs", Edition2021) }, profile: Profile { ..: default_dev() }, kind: Host, mode: Build, features: [], rustflags: [], rustdocflags: [], links_overrides: {}, artifact: false, artifact_target_for_features: None, is_std: false, dep_hash: 18388994549511200985 }
+warning: output filename collision at H:\rust wasm video cutter\target\debug\flashcut_frontend.pdb
+  |
+  = note: the bin target `flashcut-frontend` in package `flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)` has the same output filename as the lib target `flashcut_frontend` in package `flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)`
+  = note: if this looks unexpected, it may be a bug in Cargo. Please file a bug report at https://github.com/rust-lang/cargo/issues/ with as much information as you can provide.
+  = note: cargo 1.93.1 (083ac5135 2025-12-15) running on `x86_64-pc-windows-msvc` target `x86_64-pc-windows-msvc`
+  = note: first unit: Unit { pkg: Package { id: PackageId { name: "flashcut-frontend", version: "0.1.0", source: "H:\\rust wasm video cutter\\crates\\frontend" }, ..: ".." }, target: TargetInner { name: "flashcut-frontend", doc: true, ..: with_path("H:\\rust wasm video cutter\\crates\\frontend\\src\\main.rs", Edition2021) }, profile: Profile { ..: default_dev() }, kind: Host, mode: Build, features: [], rustflags: [], rustdocflags: [], links_overrides: {}, artifact: false, artifact_target_for_features: None, is_std: false, dep_hash: 18388994549511200985 }
+  = note: second unit: Unit { pkg: Package { id: PackageId { name: "flashcut-frontend", version: "0.1.0", source: "H:\\rust wasm video cutter\\crates\\frontend" }, ..: ".." }, target: TargetInner { name_inferred: true, ..: lib_target("flashcut_frontend", ["cdylib"], "H:\\rust wasm video cutter\\crates\\frontend\\src\\lib.rs", Edition2021) }, profile: Profile { ..: default_dev() }, kind: Host, mode: Build, features: [], rustflags: [], rustdocflags: [], links_overrides: {}, artifact: false, artifact_target_for_features: None, is_std: false, dep_hash: 18388994549511200985 }
+warning: unused import: `crate::webcodecs::EncodedVideoChunk`
+ --> crates\core-wasm\src\encoder.rs:1:5
+  |
+1 | use crate::webcodecs::EncodedVideoChunk;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> crates\core-wasm\src\encoder.rs:129:9
+    |
+129 |     let mut blob_parts = web_sys::BlobPropertyBag::new();
+    |         ----^^^^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: `flashcut-core-wasm` (lib) generated 2 warnings (run `cargo fix --lib -p flashcut-core-wasm` to apply 2 suggestions)
+   Compiling flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)
+warning: unused import: `Deserialize`
+  --> crates\backend\src\handlers.rs:12:13
+   |
+12 | use serde::{Deserialize, Serialize};
+   |             ^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `MAX_PARTICIPANTS` is never used
+ --> crates\backend\src\session.rs:7:11
+  |
+7 | pub const MAX_PARTICIPANTS: usize = 10;
+  |           ^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `flashcut-backend` (bin "flashcut-server") generated 2 warnings (run `cargo fix --bin "flashcut-server" -p flashcut-backend` to apply 1 suggestion)
+warning: unused import: `leptos::*`
+ --> crates\frontend\src\main.rs:1:5
+  |
+1 | use leptos::*;
+  |     ^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `video_clone`
+   --> crates\frontend\src\components\toolbar.rs:105:9
+    |
+105 |     let video_clone = video.clone();
+    |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_video_clone`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+error: linking with `link.exe` failed: exit code: 1201
+  |
+  = note: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe" "/NOLOGO" "C:\\Users\\BigBr\\AppData\\Local\\Temp\\rustc2cRQkM\\symbols.o" "<16 object files omitted>" "H:\\rust wasm video cutter\\target\\debug\\deps/{libconsole_error_panic_hook-4ec4d06e556f38af,libleptos-e0ab08ed35c869c2,libleptos_server-321a33f47e7a1b3c,libleptos_config-9bb190609614d6a7,libtyped_builder-c1ceca313ac67531,libregex-e922c470c64738cd,libregex_automata-a26b1f117e89d2af,libaho_corasick-c5b4dc4a1828ae39,libregex_syntax-35b8eea190baa77c,libconfig-c0c6b86adfbb5069,libpathdiff-3bf43389a3c950ed,libtoml-c19f182e397bccbe,libtoml_edit-c959e1b1bf91d902,libserde_spanned-6c55c7393f774187,libwinnow-a136293978a92280,libtoml_write-217e0bc284077531,libtoml_datetime-d387523db34b8f6f,libnom-d35f61c5d90893d1,libconvert_case-2f96020124e75541,libunicode_segmentation-4a603e3cbce8c3af,libleptos_dom-0630590bdfaf7039,libhtml_escape-24bbfd9613900277,libutf8_width-fb85386a2ececc51,libpad_adapter-69cc65b1c6c2f7e8,libitertools-499647f57bc33cd4,libeither-728e41f511035caf,libserver_fn-0555688cacf80dae,libserde_qs-b1ac59466f286dc8,libciborium-53e99e39085574c3,libciborium_ll-7533cfe85eeba5c9,libhalf-dc04060c8b1e54f4,libzerocopy-27f64eb20ed7aeee,libciborium_io-c45c04c4e82cc76e,libxxhash_rust-8ea1cdfbadfa3842,libdashmap-eba6c1d9ff0a239d,liblock_api-030d93b541ad9d3a,libscopeguard-cd3b1f2c1ab035dc,libparking_lot_core-c6eb04d5de895df1,libwindows_link-5ee0fa7a3e688947,libhashbrown-7ef91302727e1a97,libconst_format-271c7386f3da72de,libwasm_streams-dd1a150db26bba6d,libgloo_net-6e2de07f124243e8,libwasm_bindgen_futures-cf9b85afa989647a,libgloo_utils-00eb975bdb69d8c2,libweb_sys-435961265226fbf8,libjs_sys-a50dece56d4fde8a,libwasm_bindgen-14a0b14505bfc603,libwasm_bindgen_shared-bfe8942f8c3b5659,libunicode_ident-c961f20e3f88f02b,liburl-7b77956d76690631,libidna-3c575a6348340563,libidna_adapter-92fe91e003a806c9,libicu_properties-98d164b215ad906c,libicu_properties_data-53635d0b83194f8c,libicu_normalizer-c59e07b5af92ede2,libsmallvec-f95bf9f84435d181,libicu_normalizer_data-a8b89b2201d383d3,libicu_collections-17af3501b6106b7a,libutf8_iter-1afe0bd4df6893d8,libpotential_utf-818f30707809fd5c,libicu_provider-a77d3d48098a07ef,libicu_locale_core-69faa8d69ab4f894,libtinystr-b0d060b55c8a976f,liblitemap-fbf34bc2a878e95c,libwriteable-ed24e3c426108b86,libzerovec-d91efbdb3585a8fe,libzerotrie-36010bbd9097c7d3,libyoke-182ea3423b8aecb4,libstable_deref_trait-43eda3c73c719237,libzerofrom-d4dcc1a2cd5310a3,libform_urlencoded-fb08b65ad21c7dee,libpercent_encoding-90d6fd36a0e65c1d,libhttp-1eecdf3c3aee2600,libbytes-19667fedb4ba4a18,libsend_wrapper-bc5c43b120090cee,libleptos_reactive-65d867184b48ee21,libserde_json-6e10fa2ab3645f4e,libitoa-6e5ff90b1c9a445c,libzmij-f826c7a5704d4328,libself_cell-a24544875da24ad8,liboco_ref-034a7b037866cb38,libslotmap-d5996c954225cf68,libserde-2515c44cb1aa2231,libserde_core-504da37bef6817f9,librustc_hash-5cb28d17adb5f44f,libpin_project-50e580d19039a541,libindexmap-341aff46daab76d3,libequivalent-92f1c000624f2a51,libhashbrown-b81cdc27e3ba37c6,libthiserror-d7752212c30dbe31,libfutures-ed722a069f62696a,libfutures_executor-f65d2f95c42b023e,libfutures_util-9d71b4671a8d043a,libmemchr-1700c8f0399e475b,libfutures_io-a01e45e1c948e4df,libslab-9a3b7f1dcfb28663,libfutures_channel-c5f3fd6fb46d1e1a,libfutures_sink-315ce45ed4969704,libfutures_task-3a4eb9817221c29f,libfutures_core-7ce529d7007c3a07,libcfg_if-7226893fe2365613,libtracing-b91c83c4976f8188,liblog-0c144af1e11c33b6,libpin_project_lite-5a75a2e00b7248cd,libtracing_core-42d14f14efa5872c,libonce_cell-4da84406b6047a19}.rlib" "<sysroot>\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib/{libstd-*,libpanic_unwind-*,libcfg_if-*,libwindows_targets-*,librustc_demangle-*,libstd_detect-*,libhashbrown-*,librustc_std_workspace_alloc-*,libunwind-*,librustc_std_workspace_core-*,liballoc-*,libcore-*,libcompiler_builtins-*}.rlib" "kernel32.lib" "kernel32.lib" "kernel32.lib" "ntdll.lib" "userenv.lib" "ws2_32.lib" "dbghelp.lib" "/defaultlib:msvcrt" "/NXCOMPAT" "/OUT:H:\\rust wasm video cutter\\target\\debug\\deps\\flashcut_frontend.exe" "/OPT:REF,NOICF" "/DEBUG" "/PDBALTPATH:%_PDB%" "/NATVIS:<sysroot>\\lib\\rustlib\\etc\\intrinsic.natvis" "/NATVIS:<sysroot>\\lib\\rustlib\\etc\\liballoc.natvis" "/NATVIS:<sysroot>\\lib\\rustlib\\etc\\libcore.natvis" "/NATVIS:<sysroot>\\lib\\rustlib\\etc\\libstd.natvis"
+  = note: some arguments are omitted. use `--verbose` to show all linker arguments
+  = note: LINK : fatal error LNK1201: Fehler beim Schreiben in die Programmdatenbank "H:\rust wasm video cutter\target\debug\deps\flashcut_frontend.pdb"". Möglicherweise ist nicht genügend Festplattenspeicher verfügbar, ist der Pfad ungültig oder reichen die Zugriffsrechte nicht aus.␍
+          
+
+warning: `flashcut-frontend` (bin "flashcut-frontend") generated 2 warnings
+error: could not compile `flashcut-frontend` (bin "flashcut-frontend") due to 1 previous error; 2 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+warning: `flashcut-frontend` (lib) generated 1 warning (1 duplicate)

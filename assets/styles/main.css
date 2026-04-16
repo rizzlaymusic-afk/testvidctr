@@ -1,0 +1,357 @@
+:root {
+    /* Load JetBrains Mono for monospace metrics */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&display=swap');
+
+/* assets/styles/main.css */
+:root {
+    /* U-BFCW design tokens (Dark Matter Mode) */
+    --bg-primary: #000000;
+    /* Pure black */
+    --bg-secondary: #070707;
+    --bg-card: #0a0a0a;
+    --accent-red: #FF3B3B;
+    /* Primary accent per spec */
+    --accent-green: #00ff88;
+    --accent-blue: #4d9eff;
+    --text-primary: #e8eaf0;
+    --text-secondary: #9aa0ab;
+    --border: #111111;
+    --border-width: 2px;
+    /* Heavy borders */
+    --timeline-height: 48px;
+    --control-radius: 2px;
+    /* sharp corners */
+    --mono-font-stack: 'JetBrains Mono', 'Fira Code', ui-monospace, 'SFMono-Regular', Menlo, Monaco, 'Roboto Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    /* Fluid typography across viewports */
+    font-size: clamp(13px, 0.8vw + 12px, 18px);
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: var(--border-width) solid var(--border);
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--accent-red);
+    letter-spacing: 0.6px;
+}
+
+.tagline {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-family: var(--mono-font-stack);
+}
+
+.drop-zone {
+    border: var(--border-width) dashed var(--border);
+    border-radius: 6px;
+    padding: 48px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+}
+
+.drop-zone:active {
+    transform: scale(0.995);
+}
+
+.timeline-container {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent), var(--bg-secondary);
+    border-radius: 4px;
+    padding: 12px;
+    margin: 16px 0;
+    border: var(--border-width) solid var(--border);
+}
+
+.timeline-track {
+    position: relative;
+    height: var(--timeline-height);
+    background: var(--bg-card);
+    border-radius: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    border: var(--border-width) solid var(--border);
+}
+
+.timeline-active {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: rgba(255, 59, 59, 0.08);
+    border-top: var(--border-width) solid rgba(255, 59, 59, 0.35);
+    border-bottom: var(--border-width) solid rgba(255, 59, 59, 0.35);
+}
+
+.timeline-excluded {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: rgba(255, 77, 106, 0.06);
+}
+
+.trim-handle {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    /* visual thin handle */
+    height: 100%;
+    background: var(--accent-red);
+    cursor: ew-resize;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    z-index: 30;
+}
+
+.trim-handle::before {
+    /* generous hit area for sub-pixel precision while keeping a thin visual */
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+    /* pointer events handled by the handle itself */
+}
+
+.playhead {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--accent-blue);
+    transform: translateX(-50%);
+    z-index: 40;
+    pointer-events: none;
+}
+
+.timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.time-label {
+    font-family: var(--mono-font-stack);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.2px;
+}
+
+.timeline-duration {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-family: var(--mono-font-stack);
+}
+
+.export-btn {
+    background: var(--accent-red);
+    color: #000;
+    border: var(--border-width) solid var(--border);
+    padding: 10px 22px;
+    border-radius: var(--control-radius);
+    font-weight: 800;
+    cursor: pointer;
+    font-family: var(--mono-font-stack);
+    transition: transform 0.08s ease, filter 0.12s ease, background-color 0.12s ease;
+    will-change: transform;
+}
+
+.export-btn:active {
+    transform: scale(0.95);
+    filter: brightness(0.98);
+}
+
+.progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.0));
+    background-color: var(--accent-red);
+    transition: width 0.3s ease;
+    animation: shimmer 1.6s linear infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.session-panel {
+    background: rgba(255, 255, 255, 0.02);
+    border: var(--border-width) solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    margin: 16px 0;
+    backdrop-filter: blur(12px);
+}
+
+/* Modal/backdrop modality for settings and secondary HUDs */
+.backdrop-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(24px);
+    z-index: 99999;
+}
+
+/* Utility micro-animation */
+.micro-anim {
+    transition: transform 0.08s ease, background-color 0.12s ease;
+}
+
+.micro-anim:active {
+    transform: scale(0.95);
+}
+
+/* Editor layout panes and resizer */
+.editor-layout {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 12px;
+}
+
+.left-pane {
+    flex: 0 0 auto;
+    transition: width 0.12s ease;
+    min-width: 220px;
+}
+
+.right-pane {
+    flex: 1 1 auto;
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.resizer {
+    width: 12px;
+    cursor: col-resize;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 60;
+}
+
+.resizer::before {
+    content: '';
+    width: 2px;
+    height: 40px;
+    background: var(--border);
+    border-radius: 2px;
+    opacity: 0.85;
+}
+
+.editor-layout.theater-mode .right-pane {
+    display: none;
+}
+
+.editor-layout.theater-mode .left-pane {
+    width: 100% !important;
+}
+
+.video-player {
+    width: 100%;
+}
+
+.video-player .video-element {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--control-radius);
+    background: #000;
+}
+
+.toolbar {
+    display: flex;
+    gap: 8px;
+    padding: 8px 0;
+    align-items: center;
+}
+
+.error-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--accent-red);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+
+/* Dev: make file input visible and add debug HUD */
+.drop-zone input[type="file"] {
+    display: block;
+    margin: 12px auto;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text-primary);
+    border: 1px dashed var(--border);
+    border-radius: 4px;
+}
+
+.debug-hud {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: rgba(10, 10, 10, 0.6);
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-family: var(--mono-font-stack);
+    font-size: 0.85rem;
+    z-index: 99999;
+    text-align: right;
+}

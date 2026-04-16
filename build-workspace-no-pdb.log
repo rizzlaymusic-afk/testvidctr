@@ -1,0 +1,308 @@
+warning: output filename collision at C:\temp\flashcut_target_no_pdb\debug\deps\flashcut_frontend.pdb
+  |
+  = note: the bin target `flashcut-frontend` in package `flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)` has the same output filename as the lib target `flashcut_frontend` in package `flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)`
+  = note: if this looks unexpected, it may be a bug in Cargo. Please file a bug report at https://github.com/rust-lang/cargo/issues/ with as much information as you can provide.
+  = note: cargo 1.93.1 (083ac5135 2025-12-15) running on `x86_64-pc-windows-msvc` target `x86_64-pc-windows-msvc`
+  = note: first unit: Unit { pkg: Package { id: PackageId { name: "flashcut-frontend", version: "0.1.0", source: "H:\\rust wasm video cutter\\crates\\frontend" }, ..: ".." }, target: TargetInner { name: "flashcut-frontend", doc: true, ..: with_path("H:\\rust wasm video cutter\\crates\\frontend\\src\\main.rs", Edition2021) }, profile: Profile { ..: default_dev() }, kind: Host, mode: Build, features: [], rustflags: ["-C", "debuginfo=0"], rustdocflags: [], links_overrides: {}, artifact: false, artifact_target_for_features: None, is_std: false, dep_hash: 2541841110019838836 }
+  = note: second unit: Unit { pkg: Package { id: PackageId { name: "flashcut-frontend", version: "0.1.0", source: "H:\\rust wasm video cutter\\crates\\frontend" }, ..: ".." }, target: TargetInner { name_inferred: true, ..: lib_target("flashcut_frontend", ["cdylib"], "H:\\rust wasm video cutter\\crates\\frontend\\src\\lib.rs", Edition2021) }, profile: Profile { ..: default_dev() }, kind: Host, mode: Build, features: [], rustflags: ["-C", "debuginfo=0"], rustdocflags: [], links_overrides: {}, artifact: false, artifact_target_for_features: None, is_std: false, dep_hash: 2541841110019838836 }
+warning: output filename collision at C:\temp\flashcut_target_no_pdb\debug\flashcut_frontend.pdb
+  |
+  = note: the bin target `flashcut-frontend` in package `flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)` has the same output filename as the lib target `flashcut_frontend` in package `flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)`
+  = note: if this looks unexpected, it may be a bug in Cargo. Please file a bug report at https://github.com/rust-lang/cargo/issues/ with as much information as you can provide.
+  = note: cargo 1.93.1 (083ac5135 2025-12-15) running on `x86_64-pc-windows-msvc` target `x86_64-pc-windows-msvc`
+  = note: first unit: Unit { pkg: Package { id: PackageId { name: "flashcut-frontend", version: "0.1.0", source: "H:\\rust wasm video cutter\\crates\\frontend" }, ..: ".." }, target: TargetInner { name: "flashcut-frontend", doc: true, ..: with_path("H:\\rust wasm video cutter\\crates\\frontend\\src\\main.rs", Edition2021) }, profile: Profile { ..: default_dev() }, kind: Host, mode: Build, features: [], rustflags: ["-C", "debuginfo=0"], rustdocflags: [], links_overrides: {}, artifact: false, artifact_target_for_features: None, is_std: false, dep_hash: 2541841110019838836 }
+  = note: second unit: Unit { pkg: Package { id: PackageId { name: "flashcut-frontend", version: "0.1.0", source: "H:\\rust wasm video cutter\\crates\\frontend" }, ..: ".." }, target: TargetInner { name_inferred: true, ..: lib_target("flashcut_frontend", ["cdylib"], "H:\\rust wasm video cutter\\crates\\frontend\\src\\lib.rs", Edition2021) }, profile: Profile { ..: default_dev() }, kind: Host, mode: Build, features: [], rustflags: ["-C", "debuginfo=0"], rustdocflags: [], links_overrides: {}, artifact: false, artifact_target_for_features: None, is_std: false, dep_hash: 2541841110019838836 }
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.45
+   Compiling cfg-if v1.0.4
+   Compiling pin-project-lite v0.2.17
+   Compiling memchr v2.8.0
+   Compiling version_check v0.9.5
+   Compiling once_cell v1.21.4
+   Compiling futures-core v0.3.32
+   Compiling windows-link v0.2.1
+   Compiling serde_core v1.0.228
+   Compiling futures-sink v0.3.32
+   Compiling serde v1.0.228
+   Compiling futures-channel v0.3.32
+   Compiling futures-task v0.3.32
+   Compiling futures-io v0.3.32
+   Compiling slab v0.4.12
+   Compiling itoa v1.0.18
+   Compiling smallvec v1.15.1
+   Compiling rustversion v1.0.22
+   Compiling parking_lot_core v0.9.12
+   Compiling wasm-bindgen-shared v0.2.118
+   Compiling bytes v1.11.1
+   Compiling thiserror v1.0.69
+   Compiling scopeguard v1.2.0
+   Compiling stable_deref_trait v1.2.1
+   Compiling lock_api v0.4.14
+   Compiling zerocopy v0.8.48
+   Compiling bumpalo v3.20.2
+   Compiling syn v2.0.117
+   Compiling http v1.4.0
+   Compiling log v0.4.29
+   Compiling litemap v0.8.2
+   Compiling writeable v0.6.3
+   Compiling tracing-core v0.1.36
+   Compiling icu_normalizer_data v2.2.0
+   Compiling wasm-bindgen v0.2.118
+   Compiling utf8_iter v1.0.4
+   Compiling percent-encoding v2.3.2
+   Compiling zmij v1.0.21
+   Compiling icu_properties_data v2.2.0
+   Compiling windows-sys v0.61.2
+   Compiling serde_json v1.0.149
+   Compiling hashbrown v0.17.0
+   Compiling equivalent v1.0.2
+   Compiling typenum v1.19.0
+   Compiling form_urlencoded v1.2.2
+   Compiling generic-array v0.14.7
+   Compiling unicode-segmentation v1.13.2
+   Compiling indexmap v2.14.0
+   Compiling proc-macro-error-attr v1.0.4
+   Compiling unicode-xid v0.2.6
+   Compiling convert_case v0.6.0
+   Compiling const_format_proc_macros v0.2.34
+   Compiling parking_lot v0.12.5
+   Compiling proc-macro-error v1.0.4
+   Compiling mio v1.2.0
+   Compiling socket2 v0.6.3
+   Compiling httparse v1.10.1
+   Compiling synstructure v0.13.2
+   Compiling wasm-bindgen-macro-support v0.2.118
+   Compiling const_format v0.2.35
+   Compiling proc-macro-utils v0.10.0
+   Compiling proc-macro-utils v0.8.0
+   Compiling aho-corasick v1.1.4
+   Compiling proc-macro2-diagnostics v0.10.1
+   Compiling getrandom v0.2.17
+   Compiling anyhow v1.0.102
+   Compiling regex-syntax v0.8.10
+   Compiling getrandom v0.4.2
+   Compiling xxhash-rust v0.8.15
+   Compiling server_fn_macro v0.6.15
+   Compiling serde_derive v1.0.228
+   Compiling futures-macro v0.3.32
+   Compiling zerofrom-derive v0.1.7
+   Compiling yoke-derive v0.8.2
+   Compiling thiserror-impl v1.0.69
+   Compiling futures-util v0.3.32
+   Compiling zerovec-derive v0.11.3
+   Compiling zerocopy-derive v0.8.48
+   Compiling displaydoc v0.2.5
+   Compiling wasm-bindgen-macro v0.2.118
+   Compiling zerofrom v0.1.7
+   Compiling yoke v0.8.2
+   Compiling tracing-attributes v0.1.31
+   Compiling zerovec v0.11.6
+   Compiling zerotrie v0.2.4
+   Compiling tokio-macros v2.7.0
+   Compiling tinystr v0.8.3
+   Compiling potential_utf v0.1.5
+   Compiling icu_locale_core v2.2.0
+   Compiling icu_collections v2.2.0
+   Compiling tokio v1.52.0
+   Compiling futures-executor v0.3.32
+   Compiling pin-project-internal v1.1.11
+   Compiling regex-automata v0.4.14
+   Compiling tracing v0.1.44
+   Compiling icu_provider v2.2.0
+   Compiling js-sys v0.3.95
+   Compiling icu_normalizer v2.2.0
+   Compiling icu_properties v2.2.0
+   Compiling futures v0.3.32
+   Compiling quote-use-macros v0.8.4
+   Compiling pin-project v1.1.11
+   Compiling winapi-util v0.1.11
+   Compiling rand_core v0.6.4
+   Compiling manyhow-macros v0.10.4
+   Compiling idna_adapter v1.2.1
+   Compiling idna v1.1.0
+   Compiling url v2.5.8
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling slotmap v1.1.1
+   Compiling yansi v1.0.1
+   Compiling hashbrown v0.14.5
+   Compiling ciborium-io v0.2.2
+   Compiling paste v1.0.15
+   Compiling camino v1.2.2
+   Compiling base64 v0.22.1
+   Compiling dashmap v5.5.3
+   Compiling half v2.7.1
+   Compiling ppv-lite86 v0.2.21
+   Compiling digest v0.10.7
+   Compiling syn_derive v0.1.8
+   Compiling rand_chacha v0.3.1
+   Compiling ciborium-ll v0.2.2
+   Compiling manyhow v0.10.4
+   Compiling quote-use v0.8.4
+   Compiling same-file v1.0.6
+   Compiling toml_datetime v0.6.11
+   Compiling serde_spanned v0.6.9
+   Compiling http-body v1.0.1
+   Compiling winnow v0.7.15
+   Compiling prettyplease v0.2.37
+   Compiling tower-service v0.3.3
+   Compiling collection_literals v1.0.3
+   Compiling interpolator v0.5.0
+   Compiling lazy_static v1.5.0
+   Compiling either v1.15.0
+   Compiling utf8-width v0.1.8
+   Compiling cpufeatures v0.2.17
+   Compiling toml_write v0.1.2
+   Compiling itertools v0.12.1
+   Compiling attribute-derive-macro v0.9.2
+   Compiling sha1 v0.10.6
+   Compiling web-sys v0.3.95
+   Compiling wasm-bindgen-futures v0.4.68
+   Compiling serde-wasm-bindgen v0.6.5
+   Compiling toml_edit v0.22.27
+   Compiling html-escape v0.2.13
+   Compiling uuid v1.23.1
+   Compiling rstml v0.11.2
+   Compiling walkdir v2.5.0
+   Compiling ciborium v0.2.2
+   Compiling rand v0.8.5
+   Compiling oco_ref v0.1.1
+   Compiling serde_qs v0.12.0
+   Compiling server_fn_macro_default v0.6.15
+   Compiling derive-where v1.6.1
+   Compiling proc-macro-error-attr2 v2.0.0
+   Compiling send_wrapper v0.6.0
+   Compiling self_cell v1.2.2
+   Compiling byteorder v1.5.0
+   Compiling utf-8 v0.7.6
+   Compiling data-encoding v2.10.0
+   Compiling tower-layer v0.3.3
+   Compiling rustc-hash v1.1.0
+   Compiling minimal-lexical v0.2.1
+   Compiling proc-macro-error2 v2.0.1
+   Compiling nom v7.1.3
+   Compiling toml v0.8.23
+   Compiling leptos_hot_reload v0.6.15
+   Compiling typed-builder-macro v0.18.2
+   Compiling attribute-derive v0.9.2
+   Compiling unicase v2.9.0
+   Compiling pathdiff v0.2.3
+   Compiling httpdate v1.0.3
+   Compiling mime v0.3.17
+   Compiling config v0.14.1
+   Compiling mime_guess v2.0.5
+   Compiling http-body-util v0.1.3
+   Compiling regex v1.12.3
+   Compiling async-recursion v1.1.1
+   Compiling drain_filter_polyfill v0.1.3
+   Compiling sync_wrapper v1.0.2
+   Compiling atomic-waker v1.1.2
+   Compiling leptos_macro v0.6.15
+   Compiling pad-adapter v0.1.1
+   Compiling inventory v0.3.24
+   Compiling hyper v1.9.0
+   Compiling typed-builder v0.18.2
+   Compiling tungstenite v0.24.0
+   Compiling console_error_panic_hook v0.1.7
+   Compiling flashcut-shared v0.1.0 (H:\rust wasm video cutter\crates\shared)
+   Compiling async-trait v0.1.89
+   Compiling leptos_config v0.6.15
+   Compiling ryu v1.0.23
+   Compiling tokio-tungstenite v0.24.0
+   Compiling serde_urlencoded v0.7.1
+   Compiling hyper-util v0.1.20
+   Compiling tower v0.5.3
+   Compiling tungstenite v0.21.0
+   Compiling gloo-timers v0.3.0
+   Compiling sharded-slab v0.1.7
+   Compiling tokio-util v0.7.18
+   Compiling axum-core v0.4.5
+   Compiling matchers v0.2.0
+   Compiling axum-macros v0.4.2
+   Compiling nu-ansi-term v0.50.3
+   Compiling tracing-log v0.2.0
+   Compiling serde_path_to_error v0.1.20
+   Compiling thread_local v1.1.9
+   Compiling http-range-header v0.4.2
+   Compiling matchit v0.7.3
+   Compiling bitflags v2.11.1
+   Compiling tracing-subscriber v0.3.23
+   Compiling tower-http v0.5.2
+   Compiling tokio-tungstenite v0.21.0
+   Compiling tower v0.4.13
+   Compiling axum v0.7.9
+   Compiling gloo-utils v0.2.0
+   Compiling leptos_reactive v0.6.15
+   Compiling gloo-net v0.6.0
+   Compiling flashcut-backend v0.1.0 (H:\rust wasm video cutter\crates\backend)
+   Compiling wasm-streams v0.4.2
+   Compiling flashcut-core-wasm v0.1.0 (H:\rust wasm video cutter\crates\core-wasm)
+warning: unused import: `Deserialize`
+  --> crates\backend\src\handlers.rs:12:13
+   |
+12 | use serde::{Deserialize, Serialize};
+   |             ^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `crate::webcodecs::EncodedVideoChunk`
+ --> crates\core-wasm\src\encoder.rs:1:5
+  |
+1 | use crate::webcodecs::EncodedVideoChunk;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `MAX_PARTICIPANTS` is never used
+ --> crates\backend\src\session.rs:7:11
+  |
+7 | pub const MAX_PARTICIPANTS: usize = 10;
+  |           ^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> crates\core-wasm\src\encoder.rs:129:9
+    |
+129 |     let mut blob_parts = web_sys::BlobPropertyBag::new();
+    |         ----^^^^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+   Compiling server_fn v0.6.15
+   Compiling leptos_server v0.6.15
+   Compiling leptos_dom v0.6.15
+warning: `flashcut-core-wasm` (lib) generated 2 warnings (run `cargo fix --lib -p flashcut-core-wasm` to apply 2 suggestions)
+warning: `flashcut-backend` (bin "flashcut-server") generated 2 warnings (run `cargo fix --bin "flashcut-server" -p flashcut-backend` to apply 1 suggestion)
+   Compiling leptos v0.6.15
+   Compiling flashcut-frontend v0.1.0 (H:\rust wasm video cutter\crates\frontend)
+warning: unused import: `leptos::*`
+ --> crates\frontend\src\main.rs:1:5
+  |
+1 | use leptos::*;
+  |     ^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `video_clone`
+   --> crates\frontend\src\components\toolbar.rs:105:9
+    |
+105 |     let video_clone = video.clone();
+    |         ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_video_clone`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+error: linking with `link.exe` failed: exit code: 1201
+  |
+  = note: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe" "/NOLOGO" "C:\\Users\\BigBr\\AppData\\Local\\Temp\\rustc8q2LSc\\symbols.o" "<16 object files omitted>" "C:\\temp\\flashcut_target_no_pdb\\debug\\deps/{libconsole_error_panic_hook-ad51eecc3fe17f2c,libleptos-b627bcd9bc87c57e,libleptos_server-4ecd287480bfd00f,libleptos_config-931ef78e414a7c57,libtyped_builder-579d77a5299324d1,libregex-456ea202dae101cd,libregex_automata-ec3c1eae94740faf,libaho_corasick-a8981d7ab987344b,libregex_syntax-548d898e44b83861,libconfig-b98e6f7e9c418f3c,libpathdiff-72b406d2f719e8ee,libtoml-c06e83002593ecbd,libtoml_edit-f9bee5d73b7329ac,libserde_spanned-e0f02345bf899295,libwinnow-ea4f349f88635632,libtoml_write-dab7c9cc13c8a9b5,libtoml_datetime-61b54a4d6f391ce8,libnom-2bc03017bce4581e,libconvert_case-010d8d66d964c489,libunicode_segmentation-bf96ee94547b9a48,libleptos_dom-6423b156a6fb525a,libhtml_escape-87ae4e1fad538324,libutf8_width-2d13377605e01375,libpad_adapter-204fa7e78ca01372,libitertools-01f6ddc9b4dc7239,libeither-b4e6716d2297ba60,libserver_fn-5030672c76d63457,libserde_qs-bdcbce4f0461f901,libciborium-3a90bcdaee5bf1bb,libciborium_ll-b755fef185c41b02,libhalf-8eda45166afca847,libzerocopy-665155614081d648,libciborium_io-6ac32cbec477d341,libxxhash_rust-4ed2ed34d68f3464,libdashmap-d89e971a9a22622e,liblock_api-7db26a274b76ebaa,libscopeguard-cc52bf6ba76cb656,libparking_lot_core-f0f21368bf8c2246,libwindows_link-6356e1cade35b4b9,libhashbrown-9562c3f42f5ff486,libconst_format-485f2af1d207dda4,libwasm_streams-45b1f2d10b5e18c4,libgloo_net-3d9d7b5c733ac09c,libwasm_bindgen_futures-ce100fdd5d92a969,libgloo_utils-aa917733274c705c,libweb_sys-5a226f84e7900026,libjs_sys-43c6de9e46b4a9e5,libwasm_bindgen-798d99263369103d,libwasm_bindgen_shared-3ca2230df1c3cebd,libunicode_ident-f1d1334ea6633944,liburl-d080dd03dc0bbdd6,libidna-a20525c679a1d9de,libidna_adapter-f46ec7aa557ab34e,libicu_properties-6e7eb4a49e117f15,libicu_properties_data-1a55ea0bc57dfe82,libicu_normalizer-f412b7d775b8bf18,libsmallvec-bd678f5982a964b9,libicu_normalizer_data-475fb1e3b78ac8cc,libicu_collections-b53ca75cd45c2d95,libutf8_iter-4b451ea6605abe0a,libpotential_utf-6de041a20e8f0420,libicu_provider-093a1456f8528947,libicu_locale_core-4d490404f8943d25,libtinystr-b7140341dfc85c87,liblitemap-159ff11fcc83957b,libwriteable-e3b0e6f71357457d,libzerovec-cd2a8bc37c04f846,libzerotrie-737e3fde22bfc294,libyoke-be5a0c0fd52c5506,libstable_deref_trait-5e217cd380482f67,libzerofrom-8c838422e94f7395,libform_urlencoded-e3551e0fd9c04f39,libpercent_encoding-ea98d3484dac4119,libhttp-cc81cc0004e2c925,libbytes-cf59c51b86e7afe4,libsend_wrapper-da32ebdda490e404,libleptos_reactive-fef65cd2b29269bd,libserde_json-77773a074eb64e72,libitoa-6b43b3a0690b37bc,libzmij-69456db54525573e,libself_cell-4da26ef789052b41,liboco_ref-8ac20b932f515211,libslotmap-1707342488f822f5,libserde-e81f4d2d0343f515,libserde_core-533c0ce28ef0843f,librustc_hash-99f8fed29d26e8b1,libpin_project-0792f2418830db83,libindexmap-4754ad305ee804db,libequivalent-60a57c5a485e6165,libhashbrown-4b495dceaa6d8e8b,libthiserror-686c55fab7d2fea9,libfutures-8cfbac4cf8e44244,libfutures_executor-566abff9f9696d2c,libfutures_util-d84608c0c57f6b29,libmemchr-75e72b2a92e3e2e4,libfutures_io-c8afeac38b333c5e,libslab-a764128ad96f82f8,libfutures_channel-216c27f92f4c77ca,libfutures_sink-153bf1146a8f0fd7,libfutures_task-d693e1dd0a1c7452,libfutures_core-391c4ae80ff5db3f,libcfg_if-617348c52fdf96c7,libtracing-11089dad0a45b342,liblog-a620ae55f87a7b5e,libpin_project_lite-2ec635e1e231d5ee,libtracing_core-11b706685f11af16,libonce_cell-47b7da937e12b9df}.rlib" "<sysroot>\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib/{libstd-*,libpanic_unwind-*,libcfg_if-*,libwindows_targets-*,librustc_demangle-*,libstd_detect-*,libhashbrown-*,librustc_std_workspace_alloc-*,libunwind-*,librustc_std_workspace_core-*,liballoc-*,libcore-*,libcompiler_builtins-*}.rlib" "kernel32.lib" "kernel32.lib" "kernel32.lib" "ntdll.lib" "userenv.lib" "ws2_32.lib" "dbghelp.lib" "/defaultlib:msvcrt" "/NXCOMPAT" "/OUT:C:\\temp\\flashcut_target_no_pdb\\debug\\deps\\flashcut_frontend.exe" "/OPT:REF,NOICF" "/DEBUG" "/PDBALTPATH:%_PDB%" "/NATVIS:<sysroot>\\lib\\rustlib\\etc\\intrinsic.natvis" "/NATVIS:<sysroot>\\lib\\rustlib\\etc\\liballoc.natvis" "/NATVIS:<sysroot>\\lib\\rustlib\\etc\\libcore.natvis" "/NATVIS:<sysroot>\\lib\\rustlib\\etc\\libstd.natvis"
+  = note: some arguments are omitted. use `--verbose` to show all linker arguments
+  = note: LINK : fatal error LNK1201: Fehler beim Schreiben in die Programmdatenbank "C:\temp\flashcut_target_no_pdb\debug\deps\flashcut_frontend.pdb"". Möglicherweise ist nicht genügend Festplattenspeicher verfügbar, ist der Pfad ungültig oder reichen die Zugriffsrechte nicht aus.␍
+          
+
+warning: `flashcut-frontend` (bin "flashcut-frontend") generated 2 warnings
+error: could not compile `flashcut-frontend` (bin "flashcut-frontend") due to 1 previous error; 2 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+warning: `flashcut-frontend` (lib) generated 1 warning (1 duplicate)

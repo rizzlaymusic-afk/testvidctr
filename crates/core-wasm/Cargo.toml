@@ -1,0 +1,34 @@
+[package]
+name = "flashcut-core-wasm"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde-wasm-bindgen = "0.6"
+console_error_panic_hook = "0.1"
+thiserror = { workspace = true }
+
+[dependencies.web-sys]
+version = "0.3.79"
+features = [
+  "Window", "Document", "HtmlCanvasElement", "HtmlVideoElement", "CanvasRenderingContext2d",
+  "File", "FileList", "FileReader", "Blob", "BlobPropertyBag", "Url",
+  "HtmlAnchorElement",
+  "FileSystemFileHandle", "FileSystemDirectoryHandle", "StorageManager",
+  "VideoDecoder", "VideoDecoderConfig", "VideoDecoderInit", "EncodedVideoChunk", "EncodedVideoChunkInit", "EncodedVideoChunkType", "VideoFrame", "VideoFrameInit",
+  "VideoEncoder", "VideoEncoderConfig", "VideoEncoderInit", "VideoEncoderEncodeOptions", "EncodedVideoChunkMetadata",
+  "Worker", "WorkerOptions", "WorkerType", "DedicatedWorkerGlobalScope", "MessageEvent",
+  "ReadableStream", "WritableStream",
+  "console",
+]
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"

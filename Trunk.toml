@@ -1,0 +1,11 @@
+[build]
+target = "crates/frontend/index.html"
+dist = "dist"
+
+[serve]
+address = "127.0.0.1"
+port = 8080
+open = false
+
+[watch]
+paths = ["crates/frontend/src", "crates/core-wasm/src", "crates/shared/src"]
