@@ -22,3 +22,23 @@ Thumbs.db
 # Environment
 .env
 .env.local
+
+# Python virtual environments
+venv/
+.venv/
+env/
+
+# Node.js
+node_modules/
+**/node_modules/
+
+# Local build artifacts
+dist/
+**/dist/
+
+# Playwright/Smoke-test deps
+tools/smoke-test/node_modules/
+
+# IDE/debug
+*.log
+.cache/
