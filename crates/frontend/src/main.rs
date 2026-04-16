@@ -1,4 +1,3 @@
-use leptos::*;
 mod components;
 mod state;
 use components::app::App;

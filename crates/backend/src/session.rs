@@ -4,7 +4,6 @@ use std::sync::Arc;
 use tokio::sync::broadcast;
 use uuid::Uuid;
 
-pub const MAX_PARTICIPANTS: usize = 10;
 const BROADCAST_CAPACITY: usize = 64;
 
 #[derive(Debug, Clone)]

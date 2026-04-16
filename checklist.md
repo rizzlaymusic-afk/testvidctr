@@ -1,6 +1,7 @@
 # Checklist
 
 ## Pre-Commit Checklist
+
 - [ ] Code compiles cleanly.
 - [ ] No new lint errors.
 - [ ] Tests pass for affected files.
@@ -10,6 +11,7 @@
 - [ ] Changelog entry drafted.
 
 ## Pre-PR Checklist
+
 - [ ] PR title follows branch naming and commit conventions.
 - [ ] Description includes the problem, fix, and docs updated.
 - [ ] Screenshots or logs included if UI/behavior changed.
@@ -17,6 +19,7 @@
 - [ ] Backup and revert notes are included.
 
 ## Pre-Deploy Checklist
+
 - [ ] Build passes in the target environment.
 - [ ] Database schema and migrations are verified.
 - [ ] Environment variables are documented.
@@ -24,6 +27,7 @@
 - [ ] Post-deploy validation steps are documented.
 
 ## Accessibility Checklist
+
 - [ ] Keyboard navigation works for all new UI.
 - [ ] ARIA roles and labels are present.
 - [ ] Contrast ratios meet WCAG AA.
@@ -31,6 +35,7 @@
 - [ ] Screen reader text is accurate.
 
 ## Security Checklist
+
 - [ ] No new broad permissions are added.
 - [ ] Data writes are validated before exec.
 - [ ] User-selected paths are handled safely.
@@ -38,7 +43,23 @@
 - [ ] Third-party dependencies are vetted.
 
 ## Post-Deploy Validation
+
 - [ ] Verify critical flows manually.
 - [ ] Confirm analytics/logging behavior.
 - [ ] Check for regressions in the changed area.
 - [ ] Confirm that docs and changelog reflect the deployed version.
+
+## Workspace Todo
+
+- **Discovery**: Reproduce issues and collect logs/telemetry. (Status: Completed)
+- **Fix build warnings/linker**: Address compiler warnings and linker failures across targets. (Status: In progress)
+- **Stabilize dev flow & assets**: Ensure dev build scripts, sample assets, and dev server reliability. (Status: In progress)
+- **Enforce U-BFCW UI rules**: Implement and audit U-BFCW UI standards across components.
+- **WASM core API stability**: Harden public WASM core APIs and maintain ABI/semantic stability.
+- **Frontend↔WASM integration tests**: Add integration tests for data exchange and runtime interactions.
+- **Playback/trim correctness**: Verify playback fidelity and trimming algorithms (edge cases).
+- **Export reliability**: Harden export pipelines, formats, and error handling.
+- **Backend WebSocket tests**: Add tests and mocks for WebSocket comms and reconnection behavior.
+- **CI automation**: Add CI jobs for builds, wasm tests, and integration smoke tests.
+- **Documentation & handover**: Update docs, runbooks, and handover notes for maintainers.
+- **Final verification & release**: Acceptance testing, release checklist, tagging, and publish steps.

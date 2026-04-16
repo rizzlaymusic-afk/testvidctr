@@ -50,8 +50,10 @@ pub fn VideoPlayer() -> impl IntoView {
     });
 
     view! {
-        <div class="video-player">
-            <video id="player" controls=true class="video-element"></video>
+        <div class="video-player" role="region" aria-label="Video player">
+            <video id="player" controls=true class="video-element" aria-label="Playback area" tabindex="0">
+                <p>"Your browser does not support the video element."</p>
+            </video>
         </div>
     }
 }

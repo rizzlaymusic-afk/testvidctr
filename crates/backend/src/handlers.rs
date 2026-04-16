@@ -9,7 +9,7 @@ use axum::{
     Json,
 };
 use futures::{SinkExt, StreamExt};
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 use uuid::Uuid;
 
 #[derive(Serialize)]

@@ -1,10 +1,8 @@
-use leptos::*;
 use crate::state::use_app_state;
-use js_sys::{Array, Function, Object, Reflect};
+use leptos::*;
 use wasm_bindgen::closure::Closure;
-use wasm_bindgen::{JsCast, JsValue};
+use wasm_bindgen::JsValue;
 use wasm_bindgen_futures::spawn_local;
-use web_sys::{HtmlAnchorElement, HtmlVideoElement, Url};
 
 #[component]
 pub fn Toolbar() -> impl IntoView {
@@ -17,26 +15,33 @@ pub fn Toolbar() -> impl IntoView {
         let end_ms = state_clone.trim_end_ms.get();
         if let Some(file) = file_opt {
             if end_ms <= start_ms {
-                state.error_message.set(Some("Trim range must be positive".to_string()));
+                state
+                    .error_message
+                    .set(Some("Trim range must be positive".to_string()));
                 return;
             }
             state.error_message.set(None);
             state.export_progress.set(Some(0.05));
             spawn_local(async move {
-                if let Err(err) = export_trimmed(file, start_ms, end_ms, state_clone.clone()).await {
-                    state_clone.error_message.set(Some(format!("Export failed: {:?}", err)));
+                if let Err(err) = export_trimmed(file, start_ms, end_ms, state_clone.clone()).await
+                {
+                    state_clone
+                        .error_message
+                        .set(Some(format!("Export failed: {:?}", err)));
                     state_clone.export_progress.set(None);
                 } else {
                     state_clone.export_progress.set(None);
                 }
             });
         } else {
-            state.error_message.set(Some("No file selected".to_string()));
+            state
+                .error_message
+                .set(Some("No file selected".to_string()));
         }
     };
     view! {
         <div class="toolbar">
-            <button class="export-btn micro-anim" on:click=on_export>"Export"</button>
+            <button type="button" class="export-btn micro-anim" on:click=on_export aria-label="Export trimmed video" disabled=move || state.export_progress.get().is_some()>"Export"</button>
             <Show when=move || state.export_progress.get().is_some() fallback=|| view! { <></> }>
                 <div class="progress-bar">
                     <div class="progress-bar-fill" style=move || format!("width: {}%;", state.export_progress.get().unwrap_or(0.0) * 100.0)></div>
@@ -78,7 +83,9 @@ async fn export_trimmed(
             Ok(())
         }
         Err(e) => {
-            state.error_message.set(Some(format!("Export failed: {:?}", e)));
+            state
+                .error_message
+                .set(Some(format!("Export failed: {:?}", e)));
             state.export_progress.set(None);
             Err(e)
         }

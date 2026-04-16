@@ -1,4 +1,3 @@
-use crate::webcodecs::EncodedVideoChunk;
 use crate::webcodecs::VideoEncoder;
 use js_sys::{Array, Function, Object, Promise, Uint8Array};
 use wasm_bindgen::prelude::*;
@@ -126,13 +125,15 @@ pub fn chunks_to_blob_and_download(chunks: Vec<Uint8Array>, filename: &str) -> R
     for c in chunks.iter() {
         arr.push(&JsValue::from(c));
     }
-    let mut blob_parts = web_sys::BlobPropertyBag::new();
+    let blob_parts = web_sys::BlobPropertyBag::new();
     blob_parts.set_type("video/webm");
     let blob = web_sys::Blob::new_with_u8_array_sequence_and_options(&arr, &blob_parts)?;
     let url = web_sys::Url::create_object_url_with_blob(&blob)?;
     let window = web_sys::window().ok_or(JsValue::from_str("No window"))?;
     let document = window.document().ok_or(JsValue::from_str("No document"))?;
-    let a = document.create_element("a")?.dyn_into::<web_sys::HtmlElement>()?;
+    let a = document
+        .create_element("a")?
+        .dyn_into::<web_sys::HtmlElement>()?;
     a.set_attribute("href", &url)?;
     a.set_attribute("download", filename)?;
     a.click();
@@ -194,9 +195,17 @@ pub async fn trim_and_export(
     });
     JsFuture::from(promise_meta).await?;
 
+    // debug: metadata loaded
+    web_sys::console::log_1(&JsValue::from_str("encoder: metadata loaded"));
+
     let start = (trim_start_ms / 1000.0).max(0.0);
     let duration_ms = (trim_end_ms - trim_start_ms).max(0.0);
     video.set_current_time(start);
+    // attempt to start playback to drive captureStream frames
+    if let Ok(promise) = video.play() {
+        let _ = JsFuture::from(promise).await;
+        web_sys::console::log_1(&JsValue::from_str("encoder: attempted video.play()"));
+    }
     // small settle
     let settle = js_sys::Promise::new(&mut |resolve, _| {
         let callback = Closure::wrap(Box::new(move || {
@@ -247,6 +256,7 @@ pub async fn trim_and_export(
     let recorded = js_sys::Array::new();
     let recorded_clone = recorded.clone();
     let ondata = Closure::wrap(Box::new(move |e: JsValue| {
+        web_sys::console::log_1(&JsValue::from_str("encoder: ondataavailable"));
         let data = js_sys::Reflect::get(&e, &JsValue::from_str("data")).unwrap_or(JsValue::NULL);
         recorded_clone.push(&data);
     }) as Box<dyn FnMut(JsValue)>);
@@ -267,6 +277,7 @@ pub async fn trim_and_export(
     }
 
     // start recorder
+    web_sys::console::log_1(&JsValue::from_str("encoder: starting MediaRecorder"));
     js_sys::Reflect::get(&recorder, &JsValue::from_str("start"))?
         .dyn_into::<Function>()?
         .call0(&recorder)?;
@@ -274,7 +285,11 @@ pub async fn trim_and_export(
     // wait duration
     let wait = js_sys::Promise::new(&mut |resolve, _| {
         let ms_f = duration_ms.max(0.0).round();
-        let ms_i32 = if ms_f > (i32::MAX as f64) { i32::MAX } else { ms_f as i32 };
+        let ms_i32 = if ms_f > (i32::MAX as f64) {
+            i32::MAX
+        } else {
+            ms_f as i32
+        };
         let callback = Closure::wrap(Box::new(move || {
             resolve.call0(&JsValue::NULL).ok();
         }) as Box<dyn FnMut()>);
@@ -304,12 +319,21 @@ pub async fn trim_and_export(
         .ok();
     });
     JsFuture::from(stop_promise).await?;
+    // recorder stopped
+    let recorded_count = recorded.length();
+    web_sys::console::log_2(
+        &JsValue::from_str("encoder: recorder stopped, chunks:"),
+        &JsValue::from_f64(recorded_count as f64),
+    );
 
     // assemble blob
     let blob = web_sys::Blob::new_with_u8_array_sequence_and_options(
         &recorded,
         &web_sys::BlobPropertyBag::new(),
     )?;
+    // debug blob size
+    let blob_size = blob.size();
+    web_sys::console::log_2(&JsValue::from_str("encoder: assembled blob size:"), &JsValue::from_f64(blob_size as f64));
     let url2 = web_sys::Url::create_object_url_with_blob(&blob)?;
     let a = web_sys::window()
         .ok_or(JsValue::from_str("No window"))?
@@ -323,6 +347,7 @@ pub async fn trim_and_export(
     web_sys::Url::revoke_object_url(&url)?;
     web_sys::Url::revoke_object_url(&url2)?;
     if progress_callback.is_function() {
+        web_sys::console::log_1(&JsValue::from_str("encoder: calling final progress 1.0"));
         progress_callback
             .dyn_ref::<Function>()
             .unwrap()
