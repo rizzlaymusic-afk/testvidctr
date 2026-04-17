@@ -22,8 +22,7 @@ pub async fn create_session(
     if let Some(range) = body.initial_trim_range {
         if let Some(session) = state.sessions.get_session(&session_id) {
             let mut s = session.state.write().await;
-            s.trim_start_ms = range.start_ms;
-            s.trim_end_ms = range.end_ms;
+            s.trim_range = range;
         }
     }
 
@@ -47,7 +46,7 @@ pub async fn get_session(
                 session_id,
                 state: SessionState {
                     playhead_ms: s.playhead_ms,
-                    trim_range: TrimRange { start_ms: s.trim_start_ms, end_ms: s.trim_end_ms },
+                    trim_range: s.trim_range.clone(),
                     participant_count: s.participant_count,
                 },
                 created_at_unix,
@@ -99,7 +98,7 @@ async fn handle_socket(socket: WebSocket, session_id: String, state: SharedState
     let current_state = (*session.state.read().await).clone();
     let sync_state = SessionState {
         playhead_ms: current_state.playhead_ms,
-        trim_range: TrimRange { start_ms: current_state.trim_start_ms, end_ms: current_state.trim_end_ms },
+        trim_range: current_state.trim_range.clone(),
         participant_count: current_state.participant_count,
     };
     let sync_msg = WsMessage::StateSync(sync_state);
@@ -144,8 +143,7 @@ async fn handle_socket(socket: WebSocket, session_id: String, state: SharedState
                                         }
                                         WsMessage::TrimUpdate { range, .. } => {
                                             let mut s = session_clone.state.write().await;
-                                            s.trim_start_ms = range.start_ms;
-                                            s.trim_end_ms = range.end_ms;
+                                            s.trim_range = range.clone();
                                         }
                                         WsMessage::Ping => {
                                             let _ = session_clone.sender.send(WsMessage::Pong);

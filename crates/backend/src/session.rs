@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::sync::broadcast;
 use uuid::Uuid;
-use flashcut_shared::WsMessage;
+use flashcut_shared::{WsMessage, TrimRange};
 
 const BROADCAST_CAPACITY: usize = 64;
 
@@ -18,8 +18,7 @@ pub struct Session {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct SessionState {
     pub playhead_ms: f64,
-    pub trim_start_ms: f64,
-    pub trim_end_ms: f64,
+    pub trim_range: TrimRange,
     pub participant_count: usize,
 }
 
@@ -40,7 +39,7 @@ impl SessionStore {
             id: id.clone(),
             created_at: std::time::SystemTime::now(),
             sender,
-            state: Arc::new(tokio::sync::RwLock::new(SessionState::default())),
+            state: Arc::new(tokio::sync::RwLock::new(SessionState { playhead_ms: 0.0, trim_range: TrimRange::default(), participant_count: 0 })),
         };
         self.sessions.insert(id.clone(), session);
         tracing::info!("Neue Session erstellt: {}", id);
