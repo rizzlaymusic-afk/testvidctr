@@ -1,0 +1,39 @@
+name: FlashCut CI Debug Minimal
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [ handover-sync ]
+
+jobs:
+  debug-shared-minimal:
+    name: Debug Tests (shared + backend) Minimal
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+      - name: Install Rust (rustup)
+        run: |
+          curl https://sh.rustup.rs -sSf | sh -s -- -y
+          source $HOME/.cargo/env
+          rustup default stable
+      - name: Run tests and capture output
+        run: |
+          set -o pipefail
+          mkdir -p ci-logs
+          source $HOME/.cargo/env
+          cargo test -p flashcut-shared -p flashcut-backend --verbose 2>&1 | tee ci-logs/test-shared.log || true
+          echo $? > ci-logs/test-shared.exit
+      - name: Upload shared test logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-shared-logs
+          path: ci-logs/
