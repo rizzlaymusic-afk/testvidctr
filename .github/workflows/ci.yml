@@ -2,7 +2,7 @@ name: FlashCut CI
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ main, master, develop, handover-sync ]
   pull_request:
     branches: [ main ]
 
