@@ -29,7 +29,7 @@ jobs:
           cargo test -p flashcut-shared -p flashcut-backend --verbose 2>&1 | tee ci-logs/test-shared.log || true
           echo $? > ci-logs/test-shared.exit
       - name: Upload shared test logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-shared-logs
           path: ci-logs/
@@ -63,7 +63,7 @@ jobs:
           wasm-pack test crates/core-wasm --chrome --headless 2>&1 | tee ci-logs/wasm-test.log || true
           echo $? > ci-logs/wasm-test.exit
       - name: Upload wasm test logs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: wasm-test-logs
           path: ci-logs/
