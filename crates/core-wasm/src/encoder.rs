@@ -208,14 +208,19 @@ pub async fn trim_and_export(
     }
     // small settle
     let settle = js_sys::Promise::new(&mut |resolve, _| {
+        let resolve_clone = resolve.clone();
         let callback = Closure::wrap(Box::new(move || {
-            resolve.call0(&JsValue::NULL).ok();
+            resolve_clone.call0(&JsValue::NULL).ok();
         }) as Box<dyn FnMut()>);
-        let window = web_sys::window().expect("no window");
-        let _ = window.set_timeout_with_callback_and_timeout_and_arguments_0(
-            callback.as_ref().unchecked_ref(),
-            200,
-        );
+        // Use window if available; otherwise resolve immediately
+        if let Some(win) = web_sys::window() {
+            let _ = win.set_timeout_with_callback_and_timeout_and_arguments_0(
+                callback.as_ref().unchecked_ref(),
+                200,
+            );
+        } else {
+            resolve.call0(&JsValue::NULL).ok();
+        }
         callback.forget();
     });
     JsFuture::from(settle).await?;
@@ -267,13 +272,11 @@ pub async fn trim_and_export(
     )?;
     ondata.forget();
 
-    // progress callback initial
+    // progress callback initial (safe, avoid unwrap)
     if progress_callback.is_function() {
-        progress_callback
-            .dyn_ref::<Function>()
-            .unwrap()
-            .call1(&JsValue::NULL, &JsValue::from_f64(0.0))
-            .ok();
+        if let Some(func) = progress_callback.dyn_ref::<Function>() {
+            func.call1(&JsValue::NULL, &JsValue::from_f64(0.0)).ok();
+        }
     }
 
     // start recorder
@@ -290,14 +293,18 @@ pub async fn trim_and_export(
         } else {
             ms_f as i32
         };
+        let resolve_clone = resolve.clone();
         let callback = Closure::wrap(Box::new(move || {
-            resolve.call0(&JsValue::NULL).ok();
+            resolve_clone.call0(&JsValue::NULL).ok();
         }) as Box<dyn FnMut()>);
-        let window = web_sys::window().expect("no window");
-        let _ = window.set_timeout_with_callback_and_timeout_and_arguments_0(
-            callback.as_ref().unchecked_ref(),
-            ms_i32,
-        );
+        if let Some(win) = web_sys::window() {
+            let _ = win.set_timeout_with_callback_and_timeout_and_arguments_0(
+                callback.as_ref().unchecked_ref(),
+                ms_i32,
+            );
+        } else {
+            resolve.call0(&JsValue::NULL).ok();
+        }
         callback.forget();
     });
     JsFuture::from(wait).await?;
@@ -333,7 +340,10 @@ pub async fn trim_and_export(
     )?;
     // debug blob size
     let blob_size = blob.size();
-    web_sys::console::log_2(&JsValue::from_str("encoder: assembled blob size:"), &JsValue::from_f64(blob_size as f64));
+    web_sys::console::log_2(
+        &JsValue::from_str("encoder: assembled blob size:"),
+        &JsValue::from_f64(blob_size as f64),
+    );
     let url2 = web_sys::Url::create_object_url_with_blob(&blob)?;
     let a = web_sys::window()
         .ok_or(JsValue::from_str("No window"))?
@@ -348,11 +358,9 @@ pub async fn trim_and_export(
     web_sys::Url::revoke_object_url(&url2)?;
     if progress_callback.is_function() {
         web_sys::console::log_1(&JsValue::from_str("encoder: calling final progress 1.0"));
-        progress_callback
-            .dyn_ref::<Function>()
-            .unwrap()
-            .call1(&JsValue::NULL, &JsValue::from_f64(1.0))
-            .ok();
+        if let Some(func) = progress_callback.dyn_ref::<Function>() {
+            func.call1(&JsValue::NULL, &JsValue::from_f64(1.0)).ok();
+        }
     }
     Ok(())
 }

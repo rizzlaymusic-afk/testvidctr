@@ -3,6 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tokio::sync::broadcast;
 use uuid::Uuid;
+use flashcut_shared::WsMessage;
 
 const BROADCAST_CAPACITY: usize = 64;
 
@@ -10,7 +11,7 @@ const BROADCAST_CAPACITY: usize = 64;
 pub struct Session {
     pub id: String,
     pub created_at: std::time::SystemTime,
-    pub sender: broadcast::Sender<SessionMessage>,
+    pub sender: broadcast::Sender<WsMessage>,
     pub state: Arc<tokio::sync::RwLock<SessionState>>,
 }
 
@@ -20,31 +21,6 @@ pub struct SessionState {
     pub trim_start_ms: f64,
     pub trim_end_ms: f64,
     pub participant_count: usize,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(tag = "type", content = "payload")]
-pub enum SessionMessage {
-    TimestampUpdate {
-        participant_id: String,
-        playhead_ms: f64,
-    },
-    TrimUpdate {
-        participant_id: String,
-        start_ms: f64,
-        end_ms: f64,
-    },
-    ParticipantJoined {
-        participant_id: String,
-        participant_count: usize,
-    },
-    ParticipantLeft {
-        participant_id: String,
-        participant_count: usize,
-    },
-    StateSync(SessionState),
-    Ping,
-    Pong,
 }
 
 pub struct SessionStore {

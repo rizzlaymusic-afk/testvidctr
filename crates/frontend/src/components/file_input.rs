@@ -49,26 +49,36 @@ pub fn FileInput() -> impl IntoView {
 
                 if let Some(resp) = response {
                     if resp.ok() {
-                        match wasm_bindgen_futures::JsFuture::from(resp.blob().unwrap()).await {
-                            Ok(blob_val) => {
-                                let blob = blob_val.dyn_into::<web_sys::Blob>().unwrap();
-                                let parts = Array::new();
-                                parts.push(&blob);
-                                // Construct a File from the Blob parts. If this fails, set an error.
-                                match web_sys::File::new_with_blob_sequence(&parts, "sample.webm") {
-                                    Ok(file) => {
-                                        state.file.set(Some(file));
+                        // Avoid panics on JS interop; handle Result/Option explicitly
+                        match resp.blob() {
+                            Ok(promise) => match wasm_bindgen_futures::JsFuture::from(promise).await {
+                                Ok(blob_val) => match blob_val.dyn_into::<web_sys::Blob>() {
+                                    Ok(blob) => {
+                                        let parts = Array::new();
+                                        parts.push(&blob);
+                                        // Construct a File from the Blob parts. If this fails, set an error.
+                                        match web_sys::File::new_with_blob_sequence(&parts, "sample.webm") {
+                                            Ok(file) => {
+                                                state.file.set(Some(file));
+                                            }
+                                            Err(_) => {
+                                                state.error_message.set(Some(
+                                                    "Failed to create File from blob".to_string(),
+                                                ));
+                                            }
+                                        }
                                     }
-                                    Err(_) => {
-                                        state.error_message.set(Some(
-                                            "Failed to create File from blob".to_string(),
-                                        ));
-                                    }
-                                }
-                            }
+                                    Err(_) => state
+                                        .error_message
+                                        .set(Some("Failed to cast response to Blob".to_string())),
+                                },
+                                Err(_) => state
+                                    .error_message
+                                    .set(Some("Failed to read sample blob".to_string())),
+                            },
                             Err(_) => state
                                 .error_message
-                                .set(Some("Failed to read sample blob".to_string())),
+                                .set(Some("Response.blob() failed".to_string())),
                         }
                     } else {
                         state

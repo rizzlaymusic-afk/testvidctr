@@ -14,6 +14,7 @@ pub use session::SessionStore;
 pub type SharedState = Arc<AppState>;
 pub struct AppState {
     pub sessions: SessionStore,
+    pub frontend_url: String,
 }
 
 #[tokio::main]
@@ -28,6 +29,7 @@ async fn main() -> anyhow::Result<()> {
 
     let state = Arc::new(AppState {
         sessions: SessionStore::new(),
+        frontend_url: std::env::var("FRONTEND_URL").unwrap_or_else(|_| "http://localhost:8080".into()),
     });
 
     let cors = CorsLayer::new()
@@ -44,9 +46,10 @@ async fn main() -> anyhow::Result<()> {
         .layer(TraceLayer::new_for_http())
         .with_state(state);
 
-    let addr = "0.0.0.0:3001";
+    let addr: std::net::SocketAddr = "0.0.0.0:3001".parse()?;
     info!("FlashCut Backend läuft auf http://{}", addr);
-    let listener = tokio::net::TcpListener::bind(addr).await?;
-    axum::serve(listener, app).await?;
+    axum::Server::bind(&addr)
+        .serve(app.into_make_service())
+        .await?;
     Ok(())
 }

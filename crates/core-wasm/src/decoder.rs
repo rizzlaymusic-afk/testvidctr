@@ -3,6 +3,7 @@ use wasm_bindgen::JsCast;
 use wasm_bindgen_futures::JsFuture;
 use js_sys::{Array, Function, Object, Promise, Uint8Array};
 use crate::webcodecs::{VideoDecoder, EncodedVideoChunk};
+use serde_json::json;
 
 #[wasm_bindgen]
 pub fn create_video_decoder(on_frame: &JsValue, on_error: &JsValue) -> Result<JsValue, JsValue> {
@@ -139,13 +140,15 @@ pub async fn read_video_metadata(file: web_sys::File) -> Result<JsValue, JsValue
         let v_for_cb = video.clone();
         let v_for_set = v_for_cb.clone();
         let cb = Closure::once_into_js(move || {
-            let meta = super::types::VideoMetadata {
-                duration_ms: v_for_cb.duration() * 1000.0,
-                width: v_for_cb.video_width(),
-                height: v_for_cb.video_height(),
-                fps: 30.0,
-                codec: "unknown".to_string(),
-            };
+            let meta = json!({
+                "duration_ms": v_for_cb.duration() * 1000.0,
+                "width": v_for_cb.video_width(),
+                "height": v_for_cb.video_height(),
+                "fps": 30.0,
+                "mime_type": "",
+                "file_name": "",
+                "file_size": 0u64,
+            });
             let json = serde_json::to_string(&meta).unwrap_or_default();
             resolve.call1(&JsValue::NULL, &JsValue::from_str(&json)).ok();
         });
