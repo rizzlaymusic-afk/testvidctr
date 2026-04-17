@@ -1,4 +1,5 @@
 use crate::webcodecs::VideoEncoder;
+use crate::webcodecs_pipeline::rvfc_trim_and_export;
 use js_sys::{Array, Function, Object, Promise, Uint8Array};
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
@@ -362,5 +363,26 @@ pub async fn trim_and_export(
             func.call1(&JsValue::NULL, &JsValue::from_f64(1.0)).ok();
         }
     }
+    Ok(())
+}
+
+/// rVFC + WebCodecs pipeline: attempts to use requestVideoFrameCallback + VideoEncoder
+/// to produce a trimmed export. Falls back to MediaRecorder if needed.
+#[wasm_bindgen]
+pub async fn pipeline_trim_and_export_rvfc(
+    file: web_sys::File,
+    trim_start_ms: f64,
+    trim_end_ms: f64,
+    output_filename: &str,
+    progress_callback: &JsValue,
+) -> Result<(), JsValue> {
+    let _ = rvfc_trim_and_export(
+        JsValue::from(file),
+        trim_start_ms,
+        trim_end_ms,
+        output_filename,
+        progress_callback,
+    )
+    .await?;
     Ok(())
 }

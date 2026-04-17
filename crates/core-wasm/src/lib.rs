@@ -5,6 +5,7 @@ pub mod pipeline;
 pub mod types;
 pub mod utils;
 pub mod webcodecs;
+pub mod webcodecs_pipeline;
 
 #[wasm_bindgen(start)]
 pub fn init_panic_hook() {
