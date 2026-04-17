@@ -1,0 +1,69 @@
+name: FlashCut CI Debug
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [ handover-sync ]
+
+jobs:
+  debug-shared:
+    name: Debug Tests (shared + backend)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+      - name: Run tests and capture output
+        run: |
+          set -o pipefail
+          mkdir -p ci-logs
+          cargo test -p flashcut-shared -p flashcut-backend --verbose 2>&1 | tee ci-logs/test-shared.log || true
+          echo $? > ci-logs/test-shared.exit
+      - name: Upload shared test logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-shared-logs
+          path: ci-logs/
+
+  debug-wasm:
+    name: Debug WASM Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain (wasm target)
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - name: Cache cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+      - name: Install Chrome (debug)
+        uses: browser-actions/setup-chrome@v1
+      - name: Run wasm-pack tests and capture output
+        run: |
+          set -o pipefail
+          mkdir -p ci-logs
+          wasm-pack test crates/core-wasm --chrome --headless 2>&1 | tee ci-logs/wasm-test.log || true
+          echo $? > ci-logs/wasm-test.exit
+      - name: Upload wasm test logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: wasm-test-logs
+          path: ci-logs/
